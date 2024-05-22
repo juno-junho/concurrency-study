@@ -13,6 +13,11 @@ public class ApplyService {
         this.couponRepository = couponRepository;
     }
 
+    /**
+     * 여러 thread에서 접근 시,
+     * coupon이 발급되는 개수 확인 시점 / 쿠폰 발급 시점 차이 발생에 따른 정합성 깨짐
+     * -> race condition 발생
+     */
     public void apply(Long userId) {
         // coupon 조회
         long count = couponRepository.count();
