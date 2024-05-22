@@ -1,13 +1,13 @@
-package com.junho.stock;
+package com.junho;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StockApplication {
+public class ConcurrencyApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StockApplication.class, args);
+        SpringApplication.run(ConcurrencyApplication.class, args);
     }
 
 }
