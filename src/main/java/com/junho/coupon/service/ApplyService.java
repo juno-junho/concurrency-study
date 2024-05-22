@@ -1,6 +1,7 @@
 package com.junho.coupon.service;
 
 import com.junho.coupon.domain.Coupon;
+import com.junho.coupon.producer.CouponCreateProducer;
 import com.junho.coupon.repository.CouponCountRepository;
 import com.junho.coupon.repository.CouponRepository;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,13 @@ public class ApplyService {
     private final CouponRepository couponRepository;
     private final CouponCountRepository couponCountRepository;
 
-    public ApplyService(CouponRepository couponRepository, CouponCountRepository couponCountRepository) {
+    // kafka
+    private final CouponCreateProducer couponCreateProducer;
+
+    public ApplyService(CouponRepository couponRepository, CouponCountRepository couponCountRepository, CouponCreateProducer couponCreateProducer) {
         this.couponRepository = couponRepository;
         this.couponCountRepository = couponCountRepository;
+        this.couponCreateProducer = couponCreateProducer;
     }
 
     /**
@@ -32,7 +37,8 @@ public class ApplyService {
         }
 
         // 쿠폰 발급
-        couponRepository.save(new Coupon(userId));
+//        couponRepository.save(new Coupon(userId));
+        couponCreateProducer.create(userId);
     }
 
 }
